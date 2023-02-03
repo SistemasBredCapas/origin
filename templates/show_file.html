@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Conteúdo do Arquivo</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      setInterval(function() {
+        $.ajax({
+          url: '/show_file/',
+          success: function(data) {
+            $("pre").html(data);
+          }
+        });
+      }, 10000);
+    });
+  </script>
+</head>
+<body>
+  <pre>
+    {{ content|safe }}
+  </pre>
+</body>
+</html>

@@ -50,12 +50,19 @@ def show_file(request):
     remote_file = sftp.file("/GoodData/files/log/agent.log", "rb")
 
     lines = remote_file.readlines()
-    content = b''.join(lines[::-1]).decode("cp1252", errors='ignore')
+    content = ""
+    for line in reversed(lines):
+        line_content = line.decode("cp1252", errors='ignore')
+        if "ERROR" in line_content:
+            content += f'<span class="error">{line_content}</span>'
+        else:
+            content += line_content
 
     sftp.close()
     ssh.close()
 
     return render(request, "show_file.html", {"content": content})
+
 
 
 def show_file_json(request):
@@ -72,7 +79,13 @@ def show_file_json(request):
     remote_file = sftp.file("/GoodData/files/log/agent.log", "rb")
 
     lines = remote_file.readlines()
-    content = b''.join(lines[::-1]).decode("cp1252", errors='ignore')
+    content = ""
+    for line in lines:
+        line_content = line.decode("cp1252", errors='ignore')
+        if "ERROR" in line_content:
+            content += f'<span class="error">{line_content}</span>'
+        else:
+            content += line_content
 
     sftp.close()
     ssh.close()

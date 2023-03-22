@@ -3,6 +3,16 @@
 <head>
   <title>Conteúdo do Arquivo</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    pre {
+      font-family: monospace;
+      background-color: white;
+    }
+    .error {
+      background-color: red;
+      color:honeydew
+    }
+  </style>
   <script>
     $(document).ready(function() {
       setInterval(function() {
@@ -18,7 +28,7 @@
 </head>
 <body>
   <pre>
-    {{ content|safe }}
+    <span>{{ content|safe }}</span>
   </pre>
 </body>
 </html>
